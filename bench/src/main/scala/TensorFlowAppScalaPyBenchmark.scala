@@ -6,8 +6,10 @@ object TensorFlowAppScalaPyBenchmark extends communitybench.Benchmark {
   PyValue.disableAllocationWarning()
 
   def run(input: String): Unit = py.local {
-    val tf = py.module("tensorflow")
+    val tf = py.module("tensorflow.compat.v1")
     val np = py.module("numpy")
+
+    tf.disable_v2_behavior()
 
     val xData = Seq.fill(100)(math.random)
     val yData = xData.map(x => x * 0.1 + 0.3)

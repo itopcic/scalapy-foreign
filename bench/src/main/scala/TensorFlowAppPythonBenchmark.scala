@@ -8,9 +8,10 @@ object TensorFlowAppPythonBenchmark extends communitybench.Benchmark {
 
   def run(input: String): Unit = py.local {
     CPythonInterpreter.execManyLines(
-      """import tensorflow as tf
+      """import tensorflow.compat.v1 as tf
         |import numpy as np
         |
+        |tf.disable_v2_behavior()
         |xData = np.random.rand(100).astype(np.float32)
         |yData = (xData * 0.1) + 0.3
         |
