@@ -198,7 +198,7 @@ lazy val core = crossProject(JVMPlatform, NativePlatform)
     crossScalaVersions := supportedScalaVersions,
     libraryDependencies += "net.java.dev.jna" % "jna" % "5.9.0",
     fork in Test := true,
-    javaOptions in Test += s"-Djna.library.path=$pythonLibsDir",
+    javaOptions in Test ++= Seq(s"-Djna.library.path=$pythonLibsDir", "--enable-native-access=ALL-UNNAMED", "--add-modules", "jdk.incubator.foreign"),
     unmanagedSources / excludeFilter := HiddenFileFilter || "*Native*"
   ).nativeSettings(
     crossScalaVersions := scala2Versions,
